@@ -34,7 +34,7 @@ namespace CommandsApi.Repositories
             var command = await _dbContext.Commands.FindAsync(commandId);
             if (command == null)
             {
-                throw new ArgumentException($"Failed to find command to delete. CommandId {commandId}");
+                throw new RecordNotFoundException($"Failed to find command to delete. CommandId {commandId}");
             }
             _dbContext.Commands.Remove(command);
         }
