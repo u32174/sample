@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace CommandsApi.Data
 {
@@ -7,18 +8,21 @@ namespace CommandsApi.Data
     {
         public DbSet<Command> Commands { get; set; }
 
-        private const string CONNECTION_STRING_NAME = "TestDb";
+        private readonly string _connectionString;
 
-        private readonly IConfiguration _configuration;
-
-        public CommandsDbContext(IConfiguration configuration)
+        public CommandsDbContext(string connectionString)
         {
-            _configuration = configuration;
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new ArgumentNullException(nameof(connectionString));
+            }
+
+            _connectionString = connectionString;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(_configuration.GetConnectionString(CONNECTION_STRING_NAME));
+            optionsBuilder.UseMySQL(_connectionString);
         }
     }
 }
