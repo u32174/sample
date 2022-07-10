@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using CommandsApi.Services;
 
 namespace CommandsApi
 {
@@ -36,6 +37,7 @@ namespace CommandsApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandsApi", Version = "v1" });
             });
             services.AddCommandsDbMySqlContext(Configuration.GetConnectionString(CONNECTION_STRING_NAME));
+            services.AddScoped<ICommandService, CommandService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
