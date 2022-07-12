@@ -1,4 +1,4 @@
-﻿using CommandsApi.Data;
+﻿using CommandsApi.Data.Entities;
 using CommandsApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,10 +28,12 @@ namespace CommandsApi.Services
                 throw new ArgumentNullException(nameof(command));
             }
 
+            Guid oldId = command.Id;
+
             await _repository.AddCommandAsync(command);
             await _repository.SaveChangesAsync();
 
-            if (command.Id == Guid.Empty)
+            if (command.Id == oldId || command.Id == Guid.Empty)
             {
                 throw new Exception("Failed to save command to db or update newly created command");
             }
@@ -39,11 +41,6 @@ namespace CommandsApi.Services
 
         public async Task DeleteCommandAsync(Guid commandId)
         {
-            if (commandId == Guid.Empty)
-            {
-                throw new ArgumentException("Empty commandId");
-            }
-
             await _repository.DeleteCommandAsync(commandId);
             await _repository.SaveChangesAsync();
         }
@@ -55,11 +52,6 @@ namespace CommandsApi.Services
 
         public async Task<Command> GetCommandAsync(Guid commandId)
         {
-            if (commandId == Guid.Empty)
-            {
-                throw new ArgumentException("Empty commandId");
-            }
-
             return await _repository.GetCommandAsync(commandId);
         }
     }

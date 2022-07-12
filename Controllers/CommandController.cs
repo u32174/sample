@@ -1,4 +1,4 @@
-﻿using CommandsApi.Data;
+﻿using CommandsApi.Data.Entities;
 using CommandsApi.Dto;
 using CommandsApi.Repositories;
 using CommandsApi.Services;

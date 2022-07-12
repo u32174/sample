@@ -1,4 +1,4 @@
-﻿using CommandsApi.Data;
+﻿using CommandsApi.Data.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,8 +12,8 @@ namespace CommandsApi.Dto
         [Required]
         public string Key { get; set; }
 
-        [Required]
         [MaxLength(2048)]
+        [Required]
         public string Description { get; set; }
 
         public CommandDto() { }
@@ -29,7 +29,7 @@ namespace CommandsApi.Dto
         {
             return new Command()
             {
-                // skip id for now
+                Id = Id,
                 Key = Key,
                 Description = Description
             };

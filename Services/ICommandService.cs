@@ -1,4 +1,4 @@
-﻿using CommandsApi.Data;
+﻿using CommandsApi.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

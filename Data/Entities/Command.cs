@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CommandsApi.Data
+namespace CommandsApi.Data.Entities
 {
     public class Command
     {
